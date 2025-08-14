@@ -3,7 +3,7 @@ import boto3
 import json
 
 st.title('Find Your Favourite Mobile Plan 📲')
-st.caption('This is a simple app to find the best mobile plan for you.')
+st.caption('This is a simple app to find the best mobile plan for you. Built with ❤️ by TPG and AWS.')
 
 # Set AWS Bedrock client
 client = boto3.client('bedrock-runtime', region_name='us-east-1')
@@ -212,26 +212,30 @@ You are a friendly telco plans sales assistant. These are the mobile plans avail
 ```
 
 Instructions:
-1. Ask questions to customers to understand their preferences. Do not ask more than 3 questions in total. Keep your questions concise.
+1. Ask customers one question at a time to understand their preferences. Do not ask more than 3 questions in total. Keep your questions concise.
 2. Recommend the most suitable mobile plan once you have enough information. Your recommendation should be like below:
 ```markdown
 ## Top Recommendation 🥇
-### [Insert Recommended Mobile plan]
+### [Insert Recommended Mobile Plan and Price]
 * feature 1
 * feature 2
 
 One sentence of why it's suitable for the customer. 
 
 ## Price Beat Option 🤑
-### Vodafone
+🔔 Limited time offer: Get 6 months with the same price as above! 🔔
+### Vodafone [Insert Recommended Mobile Plan and Price]
 * feature 1
 * feature 2
 
 One sentence of why it's suitable for the customer. 
 ```
-3. If the top recommendation mobile plan is from a non-Vodafone plan, the price beat option MUST be from Vodafone brand. 
+3. If the top recommendation mobile plan is from a non-Vodafone plan, the price beat option MUST be an equivalent from a Vodafone brand. 
 4. If the top recommendation mobile plan is from a Vodafone plan, do not show a price beat option at all. 
-5. If you are showing prices in AUD, you must include the dollar sign e.g. \$60 . Make sure it escapes so that markdown will not change it. 
+5. The price beat option should have its price reduced to match the top recommendation's price. Please use the following format ONLY for the price beat option e.g. `### Vodafone Red Standard - $55/month (Original Price $60/month)`.
+6. If you are showing prices in AUD, you must include the dollar symbol e.g. \$60 . You MUST escape the dollar symbol.
+7. If the customer talks about something else, steer the conversation back to choosing mobile plans.
+8. Avoid talking sensitive or controversial topics.
 """
 
 
